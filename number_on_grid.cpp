@@ -16,7 +16,6 @@
 #include <iomanip>
 
 using namespace std;
-typedef long long int ll;
 
 constexpr unsigned long long int CYCLES_PER_SEC = 2800000000;
 constexpr double CYCLE_SEC = 1.0 / CYCLES_PER_SEC;
@@ -118,19 +117,19 @@ void solve(){
 
             // Save previous states
             int score = state.score;
-            int pre = state.field[x][y];
+            int prev = state.field[x][y];
 
             // Update states
             state.field[x][y] = v;
-            state.updateScore(x, y, pre, v);
+            state.updateScore(x, y, prev, v);
 
-            // If you want to hill climbing, do transition only with score < state.score.
+            // If you want to hill climb, do transition only with score < state.score.
             if(score < state.score || xrand_uniform() < xexp((state.score - score) * temp_inv)){
             // Transition (keep state)
             }
             else{
             // Rollback state
-                state.field[x][y] = pre;
+                state.field[x][y] = prev;
                 state.score = score;
             }
         }
