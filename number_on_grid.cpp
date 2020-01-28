@@ -43,9 +43,10 @@ inline unsigned xrand() {
 inline int xrand(int a, int b) { return a + xrand() % (b - a + 1); }
  
 // [0.0, 1.0)
-inline double xrand_uniform() { return xrand() * 2.3283064365386963e-10; }
+inline double xrand_uniform() { return xrand() * 2.328306436538696e-10; }
 
 inline double xexp(double x){
+    if(x < -20.0){ return 0.0; }
     x = 1.0 + x / 256.0;
     x *= x; x *= x; x *= x; x *= x;
     x *= x; x *= x; x *= x; x *= x;
@@ -98,7 +99,8 @@ void input(){
 void solve(){
     auto start_cycle = get_cycle();
     double current_time = get_time(start_cycle);
-    double temp_upper = 10.0;
+    // Temperature must be > 0.0
+    double temp_upper = 30.0;
     double temp_lower = 0.1;
     State state;
     state.init();
@@ -111,7 +113,7 @@ void solve(){
         for(int i=0; i<100; i++){
             int x = xrand() % N;
             int y = xrand() % N;
-            int v = xrand() % 10;
+            int v = xrand() % 10000;
             if(v == state.field[x][y]){ continue; }
             itr_cnt++;
 
