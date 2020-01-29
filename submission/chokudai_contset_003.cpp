@@ -61,7 +61,7 @@ inline double xexp(double x){
 const int N = 50;
 bool visited[N+2][N+2];
 int bfs_buff[2704];
-int diff[] = {-1, 1, -50, 50};
+int diff[] = {-1, 1, -52, 52};
 
 struct State{
     int field[N+2][N+2];
