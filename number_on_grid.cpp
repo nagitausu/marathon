@@ -7,6 +7,10 @@
 // http://shindannin.hatenadiary.com/entry/20121224/1356364040
 // https://topcoder.g.hatena.ne.jp/tomerun/20171216/1513436397
 
+#pragma GCC optimize ("Ofast")
+#pragma GCC optimize ("unroll-loops")
+#pragma GCC target ("avx")
+
 #include <algorithm>
 #include <cmath>
 #include <iostream>
@@ -21,6 +25,7 @@ constexpr unsigned long long int CYCLES_PER_SEC = 2800000000;
 constexpr double CYCLE_SEC = 1.0 / CYCLES_PER_SEC;
 constexpr double TIME_LIMIT = 2.95;
 constexpr double TIME_LIMIT_INV = 1.0 / TIME_LIMIT;
+constexpr int ITER_PER_EPOCH = 100;
 
 unsigned long long int get_cycle(){
     unsigned int low, high;
@@ -109,11 +114,11 @@ void solve(){
         current_time = get_time(start_cycle);
         double temp = temp_upper + (temp_lower - temp_upper) * current_time * TIME_LIMIT_INV;
         double temp_inv = 1.0 / temp;
-        // Each epoch has 100 iteration
-        for(int i=0; i<100; i++){
+        // Each epoch has ITER_PER_EPOCH times iteration
+        for(int i=0; i<ITER_PER_EPOCH; i++){
             int x = xrand() % N;
             int y = xrand() % N;
-            int v = xrand() % 10000;
+            int v = xrand() % 1000;
             if(v == state.field[x][y]){ continue; }
             itr_cnt++;
 
