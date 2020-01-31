@@ -52,7 +52,7 @@ inline double xrand_uniform() { return xrand() * 2.328306436538696e-10; }
 
 inline double xexp(double x){
     if(x < -20.0){ return 0.0; }
-    x = 1.0 + x / 0.00390625;
+    x = 1.0 + x * 0.00390625;
     x *= x; x *= x; x *= x; x *= x;
     x *= x; x *= x; x *= x; x *= x;
     return x;
